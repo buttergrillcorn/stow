@@ -1,0 +1,157 @@
+* {
+  border: none;
+  font-family: JetBrains Mono Nerd Font;
+  font-weight: Bold;
+  font-size: 12px;
+}
+
+/* gruvbox theme */
+@define-color bg #282828;
+@define-color bg2 #1d2021;
+@define-color grey #928374;
+@define-color red #fb4934;
+@define-color green #b8bb26;
+@define-color yellow #fabd2f;
+@define-color blue #83a598;
+@define-color purple #d3869b;
+@define-color aqua #8ec07c;
+@define-color orange #fe8019;
+@define-color fg #ebdbb2;
+
+window#waybar {
+  background: @bg;
+  color: @fg;
+  border: solid 2px @bg2;
+}
+
+#window {
+  padding: 0 200px;
+}
+
+window#waybar.empty #window {
+  color: transparent;
+  background-color: transparent;
+}
+
+#tooltip {
+  background: @bg;
+  border: solid 2px @green;
+  color: @fg;
+}
+
+#tooltip label {
+  color: @fg;
+}
+
+#submap {
+  padding-left: 12px;
+  padding-right: 15px;
+  background: @bg2;
+  color: @fg;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  border-left: solid 2px;
+  border-color: @bg2;
+}
+
+#idle_inhibitor {
+  padding-left: 12px;
+  padding-right: 15px;
+  background-color: @bg2;
+  color: @fg;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  border-left: solid 2px;
+  border-color: @bg2;
+}
+
+#workspaces {
+  background-color: @bg2;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  border-color: @bg2;
+}
+
+#workspaces button {
+  min-width: 25px;
+  padding: 4px;
+  background-color: @bg2;
+  color: @fg;
+}
+
+
+#workspaces button.active {
+  background: @green;
+  color: @bg;
+}
+
+#tray {
+  color: @fg;
+  padding-left: 20px;
+}
+
+#privacy {
+  padding-left: 12px;
+}
+
+#pulseaudio {
+  padding-left: 12px;
+}
+
+#pulseaudio-slider {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+#pulseaudio-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-height: 3px;
+  min-width: 40px;
+  background-color: @bg2;
+}
+
+#backlight-slider {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+#backlight-slider slider {
+  min-height: 0px;
+  min-width: 0px;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#backlight-slider trough {
+  min-height: 3px;
+  min-width: 40px;
+  background-color: @bg2;
+}
+
+#custom-scratchpad {
+  padding-left: 10px;
+}
+
+#battery {
+  padding-right: 20px;
+}
+
+#clock {
+  background-color: @bg2;
+  color: @fg;
+  padding: 0 15px;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  border-right: solid 2px;
+  border-color: @bg2;
+}
