@@ -145,3 +145,9 @@ autopair-init
 if [[ -o interactive ]]; then
   fastfetch
 fi
+
+# Following line was automatically added by arttime installer
+export MANPATH=/home/james/.local/share/man:$MANPATH
+
+# Following line was automatically added by arttime installer
+export PATH=/home/james/.local/bin:$PATH
