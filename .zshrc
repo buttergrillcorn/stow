@@ -145,6 +145,3 @@ autopair-init
 if [[ -o interactive ]]; then
   fastfetch
 fi
-
-# Add T480 ssh key
-ssh-add ~/.ssh/T480
