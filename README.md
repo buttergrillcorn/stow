@@ -3,7 +3,8 @@
 * Kitty
 * Zsh
   * Oh-My-Zsh
-    * auto-pair, etc
+    Custom plugins & themes
+    Note: Oh-My-Zsh will need to be installed manually first!
 * Fastfetch
 ## WM
 * Hyprland
