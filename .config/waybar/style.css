@@ -79,7 +79,6 @@ window#waybar.empty #window {
   color: @fg;
 }
 
-
 #workspaces button.active {
   background: @green;
   color: @bg;
