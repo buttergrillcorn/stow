@@ -24,3 +24,11 @@
 * NetworkManager
 ## Text Editor
 * Neovim
+## Firefox
+Note:
+1. Enable about:config setting:
+`toolkit.legacyUserProfileCustomizations.stylesheets`
+2. Copy "chrome" folder into: 
+`.mozilla/firefox/xxxxxx.default-release/`
+3. Restart Firefox, done!
+
