@@ -145,6 +145,18 @@ window#waybar.empty #window {
   padding-right: 20px;
 }
 
+#battery.charging {
+  color: @green;
+}
+
+#battery.warning {
+  color: @orange;
+}
+
+#battery.critical {
+  color: @red;
+}
+
 #clock {
   background-color: @bg2;
   color: @fg;

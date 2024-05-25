@@ -109,5 +109,9 @@
   // --- Battery ---
   "battery": {
     "format": "bat: {capacity}%",
+    "states": {
+      "warning": 25,
+      "critical": 15,
+    },
   },
 }
