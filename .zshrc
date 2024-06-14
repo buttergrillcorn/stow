@@ -114,10 +114,19 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cd="z"
-alias rm="trash"
+alias rm="trash -i"
+alias cp="cp -i"
+alias mv="mv -i"
 alias neofetch="fastfetch"
 alias fetch="fastfetch"
 alias cat="bat"
+alias zshrc="nvim ~/.zshrc"
+alias paci="sudo pacman --noconfirm -S"
+alias pacr="sudo pacman -Rns"
+alias yayi="yay -S"
+alias update="sudo pacman --noconfirm -Syyuu && yay --noconfirm -Syyuua"
+alias r="source ~/.zshrc"
+alias shutdown="shutdown now"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -151,3 +160,6 @@ export MANPATH=/home/james/.local/share/man:$MANPATH
 
 # Following line was automatically added by arttime installer
 export PATH=/home/james/.local/bin:$PATH
+
+# Doom Emacs
+export PATH=/home/james/.config/emacs/bin:$PATH
