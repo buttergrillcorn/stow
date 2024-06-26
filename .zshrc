@@ -127,6 +127,7 @@ alias yayi="yay -S"
 alias update="sudo pacman --noconfirm -Syyuu && yay --noconfirm -Syyuua"
 alias r="source ~/.zshrc"
 alias shutdown="shutdown now"
+alias em="emacs -nw"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -163,3 +164,13 @@ export PATH=/home/james/.local/bin:$PATH
 
 # Doom Emacs
 export PATH=/home/james/.config/emacs/bin:$PATH
+
+# Yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
