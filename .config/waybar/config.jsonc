@@ -40,10 +40,17 @@
     "icon-size": 12,
   },
   "hyprland/workspaces": {
-    "format": "{id}",
+    "format": "{icon}",
+    "format-icons": {
+      "special": "❏",
+    },
     "persistent-workspaces": {
       "*": 9,
+      "eDP-1": [1, 2, 3, 4, 5, 6],
+      "DP-1": [7, 8, 9],
     },
+    "show-special": true,
+    "special-visible-only": true,
   },
 
   // --- Clock ---
