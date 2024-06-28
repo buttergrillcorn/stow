@@ -27,6 +27,7 @@
     "backlight",
     "backlight/slider",
     "battery",
+    "battery#bat2",
     "clock",
   ],
 
@@ -113,9 +114,20 @@
     },
   },
 
-  // --- Battery ---
+  // --- Battery 1 ---
   "battery": {
-    "format": "bat: {capacity}%",
+    "bat": "BAT0",
+    "format": "bat[1]: {capacity}%",
+    "states": {
+      "warning": 25,
+      "critical": 15,
+    },
+  },
+
+  // --- Battery 2 ---
+  "battery#bat2": {
+    "bat": "BAT1",
+    "format": "bat[2]: {capacity}%",
     "states": {
       "warning": 25,
       "critical": 15,

@@ -1,0 +1,16 @@
+[manager]
+linemode = "size"
+show_symlink = true
+
+[opener]
+edit = [
+     { run = 'emacs -nw "$@"', block = true },
+]
+play = [
+	# { run = 'mpv "$@"', orphan = true, for = "unix" },
+]
+open = [
+	# { run = 'xdg-open "$@"', desc = "Open" },
+]
+
+[open]
