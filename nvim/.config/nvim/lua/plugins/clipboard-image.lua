@@ -1,3 +1,3 @@
 return {
-  "ekickx/clipboard-image.nvim",
+  { "ekickx/clipboard-image.nvim" },
 }
