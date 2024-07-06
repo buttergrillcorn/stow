@@ -12,7 +12,7 @@ return {
       opts = {
         absolute_path = false, -- use absolute or relative path to the working directory
         apikey = "b6398df3ccbbdbe570799f4ebae5cbd6", -- Api key, required for online saving
-        local_path = "<cwd>/media/<filename>.img", -- The path to put local files in, ex ~/Projects/<name>/assets/images/<imgname>.png
+        local_path = "/media/", -- The path to put local files in, ex ~/Projects/<name>/assets/images/<imgname>.png
         save = "local", -- Either 'local' or 'online' or 'local_file'
         filename = function()
           return vim.fn.expand("%:t:r") .. "_" .. os.date("%Y-%m-%d_%H-%M-%S")
