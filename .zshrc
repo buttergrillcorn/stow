@@ -127,7 +127,7 @@ alias yayi="yay -S"
 alias update="sudo pacman --noconfirm -Syyuu && yay --noconfirm -Syyuua"
 alias r="source ~/.zshrc"
 alias shutdown="shutdown now"
-alias em="emacs -nw"
+alias em="emacsclient -t -a -c """
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
