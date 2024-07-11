@@ -1,0 +1,171 @@
+#+TITLE: org-heatmap
+
+* Introduction
+:PROPERTIES:
+:TOC:      ignore
+:END:
+Org-heatmap is an Emacs package for Org-mode users to keep track of their task
+consistency in a visual manner. It presents an overview heatmap on Org-mode
+agendas or Calendar, providing visual representation of task completions and
+task statistics. 
+* Contents
+:PROPERTIES:
+:TOC:      this
+:END:
+- [[#screenshots][Screenshots]]
+- [[#installation][Installation]]
+- [[#usage][Usage]]
+  - [[#functions][Functions]]  
+  - [[#variables][Variables]]
+  - [[#examples][Examples]]
+- [[#todos][TODOs]]
+* Screenshots
+:PROPERTIES:
+:TOC:      0
+:END:
+Show habit completion overview in org agenda buffer.
+
+[[images/screenshots/org-heatmap-habit-overview.gif]]
+
+Display habit heatmap in Calendar
+
+[[images/screenshots/org-heatmap-habit-calendar.gif]]
+
+Add habit statistics after habits: (current streak, max streak and total done number).
+
+[[images/screenshots/habit-statistics.png]]
+* Installation
+:PROPERTIES:
+:TOC:      0
+:END:
+You must also install these packages:
+
++  Emacs >= 28.2
++  =emacsql= >= 3.1.1
++  =org-mode= >= 9.6
+
+ps. I have not tested in the lower versions of the mentioned packages.
+
+Then put org-heatmap.el in your load-path, and eval:
+#+begin_src emacs-lisp
+  (use-package org-habit
+	:custom
+	(org-habit-graph-column 1)
+	(org-habit-preceding-days 10)
+	(org-habit-following-days 1)
+	(org-habit-show-habits-only-for-today nil))
+
+  (use-package org-heatmap
+	:init
+	(add-to-list 'load-path "/path-to/emacsql/")
+	(add-to-list 'load-path "/path-to/org-heatmap/")
+	(require 'org-heatmap)
+	:after (org)
+	:custom
+	(org-agenda-files '("/path-to/org-heatmap/examples/examples.org"))
+	(org-heatmap-db-location "/path-to/org-heatmap/examples/org-heatmap.db")
+	:config
+	(org-heatmap-mode))
+#+end_src
+* Usage
+:PROPERTIES:
+:TOC:      1
+:END:
+** Functions
+
+*Note*: When you run these functions for the first time, you may experience some
+lag (the lag time depends on the length of your habits record).
+
+- =org-heatmap-habit-draw-overview=
+  
+  Draw an overview heatmap for the habit at point. When your cursor is on a
+  habit in =org-agenda-mode=, you can call this function or press =h= to generate a
+  heatmap for the habit. Call this function or press =h= again will erase the
+  heatmap.
+
+  You can hover your mouse over a rectangle, and you will see the time you spent
+  on the habit on that day. Clicking the rectangle will redirect you to an
+  agenda view of that day.
+
+
+  *Note*: This function uses =org-heatmap-rectangle= to draw heatmap, and for
+  different fonts, the display effect may vary. The font used in the screenshots
+  is =Cascadia Mono=. You can choose suitable characters based on the font you are
+  using.
+  
+- =org-heatmap-calendar=
+  
+  Display a three-month Gregorian calendar. Add highlights indicating the
+  activities on the current calendar date.
+
+  Whenever you complete a task (when a item is changed to DONE in org-mode.),
+  the activity counter for the day will increase by one and update the database.
+  You can use =org-heatmap-calendar= to generate a heatmap of your everyday
+  activity, and use built-in functions such as  =org-calendar-goto-agenda= to see
+  details.
+  
+- =org-heatmap-habit-calendar=
+  
+  Like =org-heatmap-calendar=, display a three-month Gregorian calendar for the
+  habit at point.
+
+  Add highlights indicating the times spent on the habit on the current calendar
+  date.
+
+  Whenever you complete a habit (when a item is changed to DONE in org-mode.),
+  org-heatmap will record the time you spent on this habit today and write it to
+  the database. You can use this command to generate a heatmap of your
+  everyday time spent, and use built-in functions such as =org-calendar-goto-agenda=
+  to see details.
+  
+- =org-heatmap-calendar-query=
+  
+  In =Calendar-mode= with org-heatmap highlights, you can use this function (bound
+  to =f= in =calendar-mode=) to get information about the activities on the current calendar date.
+
+  When used with =org-heatmap-calendar=, it shows how many items are done on the
+  current calendar date.
+
+  When used with =org-heatmap-habit-calendar=, it shows how many times is spent on
+  the habit on the current calendar date.
+  
+- =org-heatmap-adjust=
+
+  Change the number of done items on the current calendar date, used with
+  =org-heatmap-calendar= (bound to =j= in =calendar-mdoe=).
+  
+  *Note* that this function is not applied to =org-heatmap-habit-calendar= for now.
+- =org-heatmap-db--drop=
+  
+  Delete a table from org-heatmap database.
+** Variables
+- =org-heatmap-rectangle=
+  
+  Characters used to draw overview heatmap.
+
+  When your overview heatmap is not displayed ideally, you can consider changing
+  to suitable characters.
+
+- =org-heatmap-enable-habit-statics=
+  
+  Whether to shoaw habit statics.
+
+  Add three data after the habit entry: (current streak, max streak and total
+  done number).
+
+  *Note*: If you want to chage this variable, please set it before loading
+  org-heatmap or use =setopt=.
+
+- =org-heatmap-threshold=
+
+  Choose a different face based on the threshold arrived.
+
+- =org-heatmap-db-location=
+
+  Default database location.
+* TODOs
+- [ ] Speed up database writes
+- [ ] Add project management
+- [ ] Record more data
+- [ ] Support for more complex database operations
+- [ ] Support for more data display modes
