@@ -110,7 +110,7 @@
 (setq org-pomodoro-length 30)
 
 (after! org
-  (setq org-agenda-files '("~/denote/meta")))
+  (setq org-agenda-files '("~/denote")))
 
 (add-hook 'org-mode-hook
           (lambda () (org-autolist-mode)))
@@ -124,14 +124,14 @@
 
 (map! :leader
       (:prefix-map ("d" . "denote")
-       :desc "new note" "d" #'denote
-       :desc "new note + date" "D" #'denote-date
+       :desc "new note" "n" #'denote
+       :desc "new note + date" "N" #'denote-date
        ;; :desc "new note in subdir" "s" #'denote-subdirectory
-       :desc "list all notes" "f" #'denote-menu-list-notes
-       :desc "open note" "o" #'denote-open-or-create
+       :desc "list all notes" "D" #'denote-menu-list-notes
+       :desc "open/create note" "d" #'denote-open-or-create
        :desc "find link" "l" #'denote-find-link
        :desc "backlinks" "b" #'denote-backlinks
-       :desc "backlink for heading" "H" #'denote-org-extras-link-to-heading
+       :desc "backlink for heading" "B" #'denote-org-extras-link-to-heading
        :desc "find/create journal" "j" #'denote-journal-extras-new-or-existing-entry
        :desc "find/create journal w/date" "J" #'(lambda ()
                                                   (interactive)
@@ -148,7 +148,12 @@
                                                    (interactive)
                                                    (let ((current-prefix-arg '(4)))
                                                      (call-interactively #'denote-journal-extras-link-or-create-entry)))
-        :desc "insert link matching REGEXP" "r" #'denote-add-links)
+        :desc "insert link matching REGEXP" "r" #'denote-add-links
+        (:prefix ("d" . "dynamic blocks")
+                  :desc "links" "l" #'denote-org-extras-dblocks-insert-links
+                  :desc "backlinks" "b" #'denote-org-extras-dblocks-insert-backlinks
+                  :desc "files" "f" #'denote-org-extras-dblocks-insert-files
+                  :desc "missing links" "m" #'denote-org-extras-dblocks-insert-missing-links))
        (:prefix ("r" . "rename")
         :desc "rename note" "r" #'denote-rename-file
         :desc "rename keyword" "k" #'denote-rename-file-keywords
