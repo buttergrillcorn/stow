@@ -110,7 +110,7 @@
 (setq org-pomodoro-length 30)
 
 (after! org
-  (setq org-agenda-files '("~/denote")))
+  (setq org-agenda-files '("~/denote" "~/denote/journal")))
 
 (add-hook 'org-mode-hook
           (lambda () (org-autolist-mode)))
@@ -120,7 +120,8 @@
 
 (after! denote
   (setq denote-directory "~/denote")
-  (setq denote-known-keywords nil))
+  (setq denote-known-keywords nil)
+  (setq denote-date-prompt-use-org-read-date t))
 
 (map! :leader
       (:prefix-map ("d" . "denote")
@@ -150,10 +151,10 @@
                                                      (call-interactively #'denote-journal-extras-link-or-create-entry)))
         :desc "insert link matching REGEXP" "r" #'denote-add-links
         (:prefix ("d" . "dynamic blocks")
-                  :desc "links" "l" #'denote-org-extras-dblocks-insert-links
-                  :desc "backlinks" "b" #'denote-org-extras-dblocks-insert-backlinks
-                  :desc "files" "f" #'denote-org-extras-dblocks-insert-files
-                  :desc "missing links" "m" #'denote-org-extras-dblocks-insert-missing-links))
+                  :desc "links" "l" #'denote-org-extras-dblock-insert-links
+                  :desc "backlinks" "b" #'denote-org-extras-dblock-insert-backlinks
+                  :desc "files" "f" #'denote-org-extras-dblock-insert-files
+                  :desc "missing links" "m" #'denote-org-extras-dblock-insert-missing-links))
        (:prefix ("r" . "rename")
         :desc "rename note" "r" #'denote-rename-file
         :desc "rename keyword" "k" #'denote-rename-file-keywords
