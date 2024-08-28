@@ -1,0 +1,7 @@
+timeout 3 'light -O && light -S 5' resume 'light -I'
+# timeout 10 'hyprctl dispatch dpms off' resume 'light -I && hyprctl dispatch dpms on'
+timeout 5 'swaylock'
+timeout 10 'if pgrep swaylock; then hyprctl dispatch dpms off; fi' resume 'hyprctl dispatch dpms on'
+timeout 15 'systemctl suspend' resume 'light -I && hyprctl dispatch dpms on'
+# before-sleep 'if pgrep swaylock; then hyprctl dispatch dpms off; fi'
+after-resume 'hyprctl dispatch dpms on'
