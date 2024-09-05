@@ -68,6 +68,7 @@ terminal image viewer
 *** xdg-utils
 *** xdg-user-dirs
 *** xdg-user-dirs-gtk
+*** yt-dlp
 ** System Tools
 *** Network
 **** bluez + bluez-utils
@@ -128,6 +129,9 @@ terminal image viewer
 ****** python-grip
 ****** python-pip
 ****** python-pynvim
+****** python-beautifulsoup4
+****** python-pyperclip
+****** python-tldextract
 ***** Shell
 ****** shellcheck
 ****** shfmt
