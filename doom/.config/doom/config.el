@@ -61,7 +61,7 @@
       user-mail-address "jamesyuli@outlook.com")
 
 (setq doom-font (font-spec :family "Sarasa Term SC Nerd" :size 15 :weight 'Semibold)
-      doom-variable-pitch-font (font-spec :family "Sarasa Term SC Nerd" :size 15)
+      doom-variable-pitch-font (font-spec :family "Noto Sans CJK SC" :size 15)
       doom-unicode-font (font-spec :family "Symbols Nerd Font Mono" :size 16))
 
 (setq doom-theme 'doom-gruvbox)
