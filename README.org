@@ -103,6 +103,8 @@ terminal image viewer
 ***** thinkfan
 ***** thinkfan-ui
 ***** throttled
+*** Others
+**** bitwarden
 ** Communication
 *** beeper
 *** vesktop-bin
