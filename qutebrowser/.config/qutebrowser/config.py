@@ -139,7 +139,7 @@ config.set('content.local_content_can_access_file_urls', False, 'file:///home/ja
 config.source('gruvbox.py')
 
 ### Dark mode
-c.colors.webpage.darkmode.enabled = True
+# c.colors.webpage.darkmode.enabled = True
 
 ### Font
 c.fonts.default_family = 'Sarasa Term SC Nerd'
@@ -194,3 +194,6 @@ c.url.searchengines['arch'] = 'https://wiki.archlinux.org/index.php?search={}'
 c.url.searchengines['rd'] = 'https://www.reddit.com/search/?q={}'
 c.url.searchengines['ghr'] = 'https://github.com/search?q={}&type=repositories'
 c.url.searchengines['ghc'] = 'https://github.com/search?q={}&type=code'
+
+## Zoom
+c.zoom.default = '110%'
