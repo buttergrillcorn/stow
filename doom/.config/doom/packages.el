@@ -64,3 +64,6 @@
 (package! denote-explore)
 
 (package! consult-denote)
+
+(package! denote-journal
+  :recipe (:host github :repo "protesilaos/denote-journal" :branch "main"))

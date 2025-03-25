@@ -133,11 +133,11 @@
        :desc "find link" "l" #'denote-find-link
        :desc "backlinks" "b" #'denote-backlinks
        :desc "backlink for heading" "B" #'denote-org-extras-link-to-heading
-       :desc "find/create journal" "j" #'denote-journal-extras-new-or-existing-entry
+       :desc "find/create journal" "j" #'denote-journal-new-or-existing-entry
        :desc "find/create journal w/date" "J" #'(lambda ()
                                                   (interactive)
                                                   (let ((current-prefix-arg '(4)))
-                                                    (call-interactively #'denote-journal-extras-new-or-existing-entry)))
+                                                    (call-interactively #'denote-journal-new-or-existing-entry)))
        :desc "template" "t" #'denote-template
        (:prefix ("i" . "insert")
         :desc "insert/create link" "l" #'denote-link-or-create
@@ -167,6 +167,20 @@
        :desc "Search notes" "s" #'consult-denote-find
        :desc "Search notes w/grep" "S"
        #'consult-denote-grep))
+
+(map! :leader
+      (:prefix-map ("d" . "denote")
+       :desc "find/create journal" "j" #'denote-journal-new-or-existing-entry
+       :desc "find/create journal w/date" "J" #'(lambda ()
+                                                  (interactive)
+                                                  (let ((current-prefix-arg '(4)))
+                                                    (call-interactively #'denote-journal-new-or-existing-entry)))
+       (:prefix ("i" . "insert")
+        :desc "insert journal link" "j" #'denote-journal-link-or-create-entry
+        :desc "insert journal link w/date" "J" #'(lambda ()
+                                                   (interactive)
+                                                   (let ((current-prefix-arg '(4)))
+                                                     (call-interactively #'denote-journal-link-or-create-entry)))
 
 ;; (projectile-add-known-project "~/org")
 (projectile-add-known-project "~/denote")
