@@ -104,12 +104,20 @@ terminal image viewer
 ***** thinkfan
 ***** thinkfan-ui
 ***** throttled
+**** Peripherals
+***** Input Leap
+Keyboard + Mouse sharing
 *** Others
-**** bitwarden
+**** Package Management
+***** rebuild-detector
+https://github.com/maximbaz/rebuild-detector
+***** overdue
+https://github.com/tylerjl/overdue
 ** Communication
 *** beeper
 *** vesktop-bin
 ** Productivity
+*** bitwarden
 *** breaktimer
 *** safeeyes-git
 *** Programming
