@@ -105,8 +105,10 @@ terminal image viewer
 ***** thinkfan-ui
 ***** throttled
 **** Peripherals
-***** Input Leap
-Keyboard + Mouse sharing
+***** KVM
+****** Input Leap
+****** Deskflow
+****** Lan-mouse
 *** Others
 **** Package Management
 ***** rebuild-detector
