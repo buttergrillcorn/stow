@@ -61,6 +61,9 @@
 
 (package! denote-menu)
 
+(package! denote-org
+  :recipe (:host github :repo "protesilaos/denote-org" :branch "main"))
+
 (package! denote-explore)
 
 (package! consult-denote)

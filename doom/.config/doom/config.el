@@ -154,6 +154,17 @@
 
 (map! :leader
       (:prefix-map ("d" . "denote")
+       :desc "backlink for heading" "B" #'denote-org-link-to-heading
+       (:prefix ("i" . "insert")
+        :desc "insert heading link" "h" #'denote-org-link-to-heading
+        (:prefix ("d" . "dynamic blocks")
+                  :desc "links" "l" #'denote-org-dblock-insert-links
+                  :desc "backlinks" "b" #'denote-org-dblock-insert-backlinks
+                  :desc "files" "f" #'denote-org-dblock-insert-files
+                  :desc "missing links" "m" #'denote-org-dblock-insert-missing-links))))
+
+(map! :leader
+      (:prefix-map ("d" . "denote")
        :desc "Search notes" "s" #'consult-denote-find
        :desc "Search notes w/grep" "S"
        #'consult-denote-grep))

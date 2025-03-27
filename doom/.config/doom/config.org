@@ -588,6 +588,25 @@
 #+begin_src emacs-lisp :tangle packages.el
 (package! denote-menu)
 #+end_src
+** Org
+*** Packages
+#+begin_src emacs-lisp :tangle packages.el
+(package! denote-org
+  :recipe (:host github :repo "protesilaos/denote-org" :branch "main"))
+#+end_src
+*** Key Binds
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix-map ("d" . "denote")
+       :desc "backlink for heading" "B" #'denote-org-link-to-heading
+       (:prefix ("i" . "insert")
+        :desc "insert heading link" "h" #'denote-org-link-to-heading
+        (:prefix ("d" . "dynamic blocks")
+                  :desc "links" "l" #'denote-org-dblock-insert-links
+                  :desc "backlinks" "b" #'denote-org-dblock-insert-backlinks
+                  :desc "files" "f" #'denote-org-dblock-insert-files
+                  :desc "missing links" "m" #'denote-org-dblock-insert-missing-links))))
+#+end_src
 ** Explore
 *** Packages
 #+begin_src emacs-lisp :tangle packages.el
