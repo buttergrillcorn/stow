@@ -139,7 +139,7 @@ config.set('content.local_content_can_access_file_urls', False, 'file:///home/ja
 config.source('gruvbox.py')
 
 ### Dark mode
-# c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.enabled = True
 
 ### Font
 c.fonts.default_family = 'Sarasa Term SC Nerd'
@@ -160,6 +160,7 @@ c.tabs.background = True
 c.tabs.select_on_remove = 'prev'
 c.tabs.favicons.show = "always"
 c.tabs.show = 'switching'
+c.tabs.show_switching_delay = 900
 c.tabs.width = '25%'
 c.tabs.padding = {"bottom": 5, "left": 10, "right": 10, "top": 5}
 c.tabs.indicator.padding = {"bottom": 0, "left": 0, "right": 5, "top": 0}
@@ -179,7 +180,11 @@ config.bind('M', 'hint links spawn mpv {hint-url}')
 config.bind('gh', 'home')
 config.bind('gp', 'open -p')
 config.bind('pp', 'hint links run open -p {hint-url}')
-
+### Tabs
+config.bind(',tp', 'config-cycle tabs.position "top" "left"')
+config.bind(',ts', 'config-cycle tabs.show "always" "switching"')
+config.bind('tt', 'config-cycle tabs.show "always" "switching"')
+config.bind('tp', 'config-cycle tabs.position "top" "left"')
 
 ## Content blocker
 c.content.blocking.enabled = True
