@@ -1,7 +1,7 @@
 #+title: Doom Emacs Configuration
 #+author: Yu Li
 #+email: jamesyuli@outlook.com
-#+property: header-args:emacs-lisp :tangle config.el
+#+property: header-args :emacs-lisp :tangle config.el
 #+property: header-args :mkdirp yes :comment no
 #+startup: overview
 
