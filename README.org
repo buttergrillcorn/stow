@@ -69,6 +69,8 @@ terminal image viewer
 *** xdg-user-dirs
 *** xdg-user-dirs-gtk
 *** yt-dlp
+*** handlr
+xdg-open alternative
 ** System Tools
 *** Network
 **** bluez + bluez-utils
