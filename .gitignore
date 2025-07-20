@@ -3,5 +3,5 @@
 *.log
 tmp/
 
-autoconfig.yml
 qutebrowser/.config/qutebrowser/autoconfig.yml
+.projectile-cache.eld
