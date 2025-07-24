@@ -155,16 +155,18 @@ c.hints.radius = 0
 c.hints.uppercase = True
 
 ### Tab
-c.tabs.position = "left"
+c.tabs.position = "top"
 c.tabs.background = True
 c.tabs.select_on_remove = 'prev'
 c.tabs.favicons.show = "always"
-c.tabs.show = 'switching'
+c.tabs.show = 'always'
 c.tabs.show_switching_delay = 900
 c.tabs.width = '25%'
 c.tabs.padding = {"bottom": 5, "left": 10, "right": 10, "top": 5}
 c.tabs.indicator.padding = {"bottom": 0, "left": 0, "right": 5, "top": 0}
+c.tabs.indicator.width = 0
 c.tabs.last_close = 'default-page'
+c.tabs.min_width = 200
 
 ## Session
 c.auto_save.session = True

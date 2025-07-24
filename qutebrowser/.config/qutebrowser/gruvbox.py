@@ -270,7 +270,8 @@ c.colors.statusbar.url.warn.fg = bright_purple
 ### tabs
 
 # Background color of the tab bar.
-c.colors.tabs.bar.bg = bg0
+# c.colors.tabs.bar.bg = bg0
+c.colors.tabs.bar.bg = "#00000000"
 
 # Color gradient start for the tab indicator.
 c.colors.tabs.indicator.start = bright_green
@@ -285,13 +286,15 @@ c.colors.tabs.indicator.error = bright_red
 c.colors.tabs.odd.fg = fg2
 
 # Background color of unselected odd tabs.
-c.colors.tabs.odd.bg = bg0
+# c.colors.tabs.odd.bg = bg0
+c.colors.tabs.odd.bg = "#00000000"
 
 # Foreground color of unselected even tabs.
 c.colors.tabs.even.fg = c.colors.tabs.odd.fg
 
 # Background color of unselected even tabs.
-c.colors.tabs.even.bg = bg0
+# c.colors.tabs.even.bg = bg0
+c.colors.tabs.even.bg = "#00000000"
 
 # Foreground color of selected odd tabs.
 c.colors.tabs.selected.odd.fg = bg0
