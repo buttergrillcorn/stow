@@ -18,13 +18,12 @@ return {
       -- })
     end,
 
-    require("cmp").setup({
-      sources = {
-        { name = "orgmode" },
-      },
-    }),
+    -- require("blink-cmp").setup({
+    --   sources = {
+    --     { name = "orgmode" },
+    --   },
+    -- }),
   },
-
   -- Telescope Orgmode
   {
     "nvim-orgmode/telescope-orgmode.nvim",
