@@ -118,6 +118,14 @@
 (after! org
   (add-hook 'org-mode-hook 'org-appear-mode))
 
+(after! org
+  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
+
+(setq org-auto-tangle-babel-safelist '(
+                                     "~/example.org"
+                                     "~/example2.org"
+                                     ))
+
 (after! denote
   (setq denote-directory "~/denote")
   (setq denote-known-keywords nil)

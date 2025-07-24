@@ -57,6 +57,8 @@
 
 (package! org-appear)
 
+(package! org-auto-tangle)
+
 (package! denote)
 
 (package! denote-menu)

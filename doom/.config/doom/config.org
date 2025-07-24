@@ -290,7 +290,7 @@
        ;;(haskell +lsp)    ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ; a language you can depend on
-       ;;json              ; At least it ain't XML
+       json              ; At least it ain't XML
        ;;(java +lsp)       ; the poster child for carpal tunnel syndrome
        (javascript        ; all(hope(abandon(ye(who(enter(here))))))
         +lsp
@@ -466,6 +466,23 @@
 #+begin_src emacs-lisp
 (after! org
   (add-hook 'org-mode-hook 'org-appear-mode))
+#+end_src
+*** Org Auto Tangle
+**** Package
+#+begin_src emacs-lisp :tangle packages.el
+(package! org-auto-tangle)
+#+end_src
+**** Configuration
+#+begin_src emacs-lisp
+(after! org
+  (add-hook 'org-mode-hook 'org-auto-tangle-mode))
+#+end_src
+**** Safe List
+#+begin_src emacs-lisp
+(setq org-auto-tangle-babel-safelist '(
+                                     "~/example.org"
+                                     "~/example2.org"
+                                     ))
 #+end_src
 *** Org Super Links =DISABLED=
 **** Package
