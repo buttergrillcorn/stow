@@ -55,7 +55,7 @@
     "format": "{index}"
   },
   "niri/window": {
-    "format": " [  {title}  ]",
+    "format": " {title}",
     "icon": true,
     "icon-size": 14
   },
