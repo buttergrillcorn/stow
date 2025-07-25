@@ -7,16 +7,18 @@
   "margin-top": 5,
   "margin-left": 7,
   "margin-right": 5,
+
   // --- <- Left <- ---
   "modules-left": [
     "hyprland/submap",
     "idle_inhibitor",
     "hyprland/workspaces",
-    "niri/workspaces",
-    "tray"
+    "tray",
   ],
+
   // --- -> Center <- ---
-  "modules-center": ["hyprland/window", "niri/window"],
+  "modules-center": ["hyprland/window"],
+
   // --- -> Right -> ---
   "modules-right": [
     "privacy",
@@ -26,39 +28,32 @@
     "backlight/slider",
     "battery",
     "battery#bat2",
-    "clock"
+    "clock",
   ],
+
   // --- Hyprland ---
   "hyprland/submap": {
-    "format": "{}"
+    "format": "{}",
   },
   "hyprland/window": {
     "format": " [ {class} ]  {title}",
     "icon": true,
-    "icon-size": 12
+    "icon-size": 12,
   },
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "special": "❏"
+      "special": "❏",
     },
     "persistent-workspaces": {
       "*": 9,
       "eDP-1": [1, 2, 3, 4, 5, 6],
-      "DP-1": [7, 8, 9]
+      "DP-1": [7, 8, 9],
     },
     "show-special": true,
-    "special-visible-only": true
+    "special-visible-only": true,
   },
-  // --- Niri ---
-  "niri/workspaces": {
-    "format": "{index}"
-  },
-  "niri/window": {
-    "format": " [  {title}  ]",
-    "icon": true,
-    "icon-size": 14
-  },
+
   // --- Clock ---
   "clock": {
     "format": "{:%Y-%m-%d | %H:%M:%S}",
@@ -74,61 +69,68 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-      }
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+      },
     },
     "actions": {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
       "on-click-backward": "tz_down",
       "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    }
+      "on-scroll-down": "shift_down",
+    },
   },
+
   // --- Privacy ---
   "privacy": {
-    "icon-size": 12
+    "icon-size": 12,
   },
+
   // --- PulseAudio ---
   "pulseaudio": {
     "format": "vol:",
     "format-muted": "mute:",
     "format-bluetooth": "bt:",
-    "on-click": "pavucontrol-qt"
+    "on-click": "pavucontrol-qt",
   },
+
   // --- Backlight ---
   "backlight": {
-    "format": "bri:"
+    "format": "bri:",
   },
+
   // --- Tray ---
   "tray": {
     "icon-size": 12,
-    "spacing": 15
+    "spacing": 15,
   },
+
   // --- Idle Inhibitor ---
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
       "activated": "󰈈",
-      "deactivated": "󰈉"
-    }
+      "deactivated": "󰈉",
+    },
   },
+
   // --- Battery 1 ---
   "battery": {
     "bat": "BAT0",
     "format": "bat[1]: {capacity}%",
     "states": {
       "warning": 25,
-      "critical": 15
-    }
+      "critical": 15,
+    },
   },
+
   // --- Battery 2 ---
   "battery#bat2": {
     "bat": "BAT1",
     "format": "bat[2]: {capacity}%",
     "states": {
       "warning": 25,
-      "critical": 15
-    }
-  }
+      "critical": 15,
+    },
+  },
 }
