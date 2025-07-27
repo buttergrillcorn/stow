@@ -84,7 +84,7 @@ plugins=(
   zoxide
   zsh-autosuggestions
   zsh-syntax-highlighting
-)
+ ssh)
 
 source $ZSH/oh-my-zsh.sh
 
