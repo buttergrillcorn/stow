@@ -55,6 +55,8 @@ environment {
     // XCURSOR_SIZE 24
     // XCURSOR_THEME "Simp1e-Gruvbox-Dark"
 
+    DISPLAY ":0"
+
     QT_QPA_PLATFORM "wayland"
     QT_QPA_PLATFORMTHEME "qt6ct"
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
@@ -153,7 +155,7 @@ input {
 output "eDP-1" {
     // off
     mode "1920x1080@60"
-    scale 1.15
+    scale 1
     transform "normal"
     position x=0 y=0
     // variable-refresh-rate // on-demand=true
@@ -195,7 +197,7 @@ binds {
     Mod+Shift+B hotkey-overlay-title="Open Browser Backup (Firefox)" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Open File Explorer (TUI)" { spawn "sh" "-c" "kitty yazi"; }
     Mod+Shift+E hotkey-overlay-title="Open File Explorer (GUI)" { spawn "nautilus"; }
-    Mod+N hotkey-overlay-title="Emacs (Client)" { spawn "sh" "-c" "emacsclient -a -c"; }
+    Mod+N hotkey-overlay-title="Emacs (Client)" { spawn "sh" "-c" "emacsclient -c"; }
     Mod+Shift+N hotkey-overlay-title="Emacs" { spawn "emacs"; }
     Mod+Shift+M hotkey-overlay-title="Notification Message Retrieve" { spawn "sh" "-c" "dunstctl history-pop"; }
     // Mod+ hotkey-overlay-title="" { spawn ""; }
