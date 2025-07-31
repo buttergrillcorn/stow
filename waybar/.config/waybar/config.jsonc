@@ -116,19 +116,21 @@
   // --- Battery 1 ---
   "battery": {
     "bat": "BAT0",
-    "format": "bat[1]: {capacity}%",
+    "format": "bat: {capacity}% + ",
     "states": {
       "warning": 25,
       "critical": 15
-    }
+    },
+    "bat-compatibility": true
   },
   // --- Battery 2 ---
   "battery#bat2": {
     "bat": "BAT1",
-    "format": "bat[2]: {capacity}%",
+    "format": "{capacity}%",
     "states": {
       "warning": 25,
       "critical": 15
-    }
+    },
+    "bat-compatibility": true
   }
 }

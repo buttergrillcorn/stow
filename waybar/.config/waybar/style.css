@@ -146,7 +146,7 @@ window#waybar.empty #window {
 }
 
 #battery {
-  padding-right: 20px;
+  padding: 0px;
 }
 
 #battery.charging {
@@ -159,6 +159,10 @@ window#waybar.empty #window {
 
 #battery.critical {
   color: @red;
+}
+
+#battery.bat2 {
+  padding-right: 20px;
 }
 
 #clock {
