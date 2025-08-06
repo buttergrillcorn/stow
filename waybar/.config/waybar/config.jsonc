@@ -116,7 +116,7 @@
   // --- Battery 1 ---
   "battery": {
     "bat": "BAT0",
-    "format": "bat: {capacity}% + ",
+    "format": "bat: {capacity}%",
     "states": {
       "warning": 25,
       "critical": 15
@@ -126,7 +126,7 @@
   // --- Battery 2 ---
   "battery#bat2": {
     "bat": "BAT1",
-    "format": "{capacity}%",
+    "format": "+ {capacity}%",
     "states": {
       "warning": 25,
       "critical": 15

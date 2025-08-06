@@ -146,7 +146,7 @@ window#waybar.empty #window {
 }
 
 #battery {
-  padding: 0px;
+  padding-right: 20px;
 }
 
 #battery.charging {
@@ -162,6 +162,7 @@ window#waybar.empty #window {
 }
 
 #battery.bat2 {
+  margin-left: -12px;
   padding-right: 20px;
 }
 
