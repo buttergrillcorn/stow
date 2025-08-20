@@ -5,3 +5,4 @@ tmp/
 
 qutebrowser/.config/qutebrowser/autoconfig.yml
 .projectile-cache.eld
+/.oh-my-zsh/custom/themes/.example.zsh-theme

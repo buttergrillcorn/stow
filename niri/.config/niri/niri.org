@@ -196,9 +196,10 @@ binds {
     Mod+B hotkey-overlay-title="Open Browser Default (Qutebrowser)" { spawn "qutebrowser"; }
     Mod+Shift+B hotkey-overlay-title="Open Browser Backup (Firefox)" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Open File Explorer (TUI)" { spawn "sh" "-c" "kitty yazi"; }
-    Mod+Shift+E hotkey-overlay-title="Open File Explorer (GUI)" { spawn "nautilus"; }
+    Mod+Shift+E hotkey-overlay-title="Open File Explorer (GUI)" { spawn "thunar"; }
     Mod+N hotkey-overlay-title="Emacs (Client)" { spawn "sh" "-c" "emacsclient -c"; }
-    Mod+Shift+N hotkey-overlay-title="Emacs" { spawn "emacs"; }
+    Mod+Shift+N hotkey-overlay-title="Emacs (GUI)" { spawn "emacs"; }
+    Mod+Shift+Ctrl+N hotkey-overlay-title="Reload + Close Emacs (Client)" { spawn "sh" "-c" "systemctl --user restart emacs.service && notify-send \"Emacs Reloaded\""; }
     Mod+Shift+M hotkey-overlay-title="Notification Message Retrieve" { spawn "sh" "-c" "dunstctl history-pop"; }
     // Mod+ hotkey-overlay-title="" { spawn ""; }
 
