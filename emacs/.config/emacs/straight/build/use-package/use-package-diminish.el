@@ -1,0 +1,1 @@
+/home/james/stow/emacs/.config/emacs/straight/repos/use-package/use-package-diminish.el

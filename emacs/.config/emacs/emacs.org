@@ -1,0 +1,90 @@
+#+title: Emacs Configuration
+#+property: header-args:emacs-lisp  :mkdirp yes :lexical t :exports code
+#+property: header-args:emacs-lisp+ :tangle init.el
+#+property: header-args:emacs-lisp+ :mkdirp yes :noweb no-export
+#+auto_tangle: yes
+
+* Test
+#+begin_src emacs-lisp
+;; Make Emacs treat the folder of this init.el as its base directory
+(setq user-emacs-directory
+      (file-name-directory (or load-file-name buffer-file-name)))
+
+#+end_src
+* Introduction
+This is my attempt at crafting my own literate Emacs configuration from the ground up after years of using Doom Emacs. Doom Emacs has served me very well and I would still recommend new beginners to try that out first rather than being thrown off by Emacs' defaults. In my opinion, Doom Emacs has much better defaults that you could just get on and do what you have to do in an afternoon. This will hopefully at least retain the new users who may not have as much enthusiasm or time (lots and lots of it) to find their way through this giant "operating system" so called Emacs.
+
+My configuration is built upon my experience of using Emacs and Linux, as well as this amazingly documented [[http://config.phundrak.com/emacs/][literate config]] by Phundrak
+** Literate Config leveraging the power of Org Mode
+This configuration is built using Org Mode, the superior text based file format that does it all!
+The power of Org Mode enables me to write my configuration code and documenting it at the same time, in a clear and organised format.
+*** Noweb syntax
+The aforementioned config by Phundrak introduced me to the [[https://orgmode.org/manual/Noweb-Reference-Syntax.html][noweb]] syntax in Org Mode. Essentially, I can define a code snippet somewhere in my config and have it expanded to be the actual code that I want to be there. This would be useful in situations, for example, when you want to keep the main code block for a certain topic tidy. Or a better and more specific example:
+I use Niri as my tiling window manager. Niri requires you to define key bindings only once in the configuration file. This means that I couldn't have a literate configuration with different sub-sections of key bindings, until I found noweb, that is.
+There's no better way to show it than demonstrating it with code:
+**** Example
+An example config
+***** Key Bindings
+****** General
+#+begin_src json
+bind {
+    Mod+Q "quit"
+}
+#+end_src
+****** Navigation
+This would not be possible since the program only allows "bind" to be defined once in the file. Tangling this with Org Mode would mean that there will be two instances of "bind" being defined in the file.
+#+begin_src json
+bind {
+    Mod+Left "move-left"
+}
+#+end_src
+******* Solution
+To solve this issue, I can use the noweb syntax for the source code.
+By simply adding ":noweb yes" to the code block and then specify what other named blocks of code I want to include.
+******** General
+#+begin_src json
+bind {
+    Mod+Q "quit"
+    <<navigation>>
+}
+#+end_src
+******** Navigation
+#+name: navigation
+#+begin_src json
+Mod+Left "move-left"
+#+end_src
+
+* Loading All Configuration Modules
+#+name: emacs-modules
+| Module Name            | Config Page                      |
+|------------------------+----------------------------------|
+| =basic-config.el=        | [[file:./basic-config.org][Basic Configuration]]              |
+| =custom-elisp.el=        | [[file:./custom-elisp.org][Custom Elisp]]                     |
+| =package-manager.el=     | [[file:./package-manager.org][Package Manager]]                  |
+| =keybind-tools.el=       | [[file:keybinding-managers.org][Keybinding Tools]]                 |
+| =applications.el=        | [[file:./packages/applications.org][Packages — Applications]]          |
+| =autocompletion.el=      | [[file:./packages/autocompletion.org][Packages — Autocompletion]]        |
+| =editing.el=             | [[file:./packages/editing.org][Packages — Editing]]               |
+| =builtin.el=             | [[file:./packages/emacs-builtin.org][Packages — Emacs Built-ins]]       |
+| =helpful.el=             | [[file:./packages/helpful.org][Packages — Making My Life Easier]] |
+| =misc.el=                | [[file:./packages/misc.org][Packages — Misc]]                  |
+| =org.el=                 | [[file:./packages/org.org][Packages — Org Mode]]              |
+| =programming.el=         | [[file:./packages/programming.org][Packages — Programming]]           |
+| =visuals.el=             | [[file:./packages/visual-config.org][Packages — Visuals]]               |
+| =keybindings.el=         | [[file:./keybindings.org][Keybindings]]                      |
+
+#+name: generate-modules
+#+begin_src emacs-lisp :tangle no :cache yes :var modules=emacs-modules :exports none
+(mapconcat (lambda (line)
+             (concat "\"" (string-trim (car line) "=" "=") "\""))
+           modules
+           " ")
+#+end_src
+
+#+RESULTS[6fe38716345502d2f063250dea8da1431c30f6af]: generate-modules
+: "basic-config.el" "custom-elisp.el" "package-manager.el" "keybind-tools.el" "applications.el" "autocompletion.el" "editing.el" "builtin.el" "helpful.el" "misc.el" "org.el" "programming.el" "visuals.el" "keybindings.el"
+
+#+begin_src emacs-lisp :noweb yes
+(dolist (module '(<<generate-modules()>>))
+  (load (expand-file-name module user-emacs-directory)))
+#+end_src

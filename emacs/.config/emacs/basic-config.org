@@ -1,0 +1,194 @@
+#+title: Basic Configurations
+#+property: header-args:emacs-lisp  :mkdirp yes :lexical t :exports code
+#+property: header-args:emacs-lisp+ :tangle basic-config.el
+#+property: header-args:emacs-lisp+ :mkdirp yes :noweb no-export
+auto_tangle: yes
+* Early Init
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle early-init.el :mkdirp yes
+:header-args:emacs-lisp+: :exports code :results silent :lexical t
+:END:
+The early-init file is where stuff gets loaded before anything else. It is often used to speed up things and change settings you might want to be as default.
+#+begin_src emacs-lisp :mkdirp yes
+(setq package-enable-at-startup nil
+      inhibit-startup-message   t
+      frame-resize-pixelwise    t  ; fine resize
+      package-native-compile    t) ; native compile packages
+(scroll-bar-mode -1)               ; disable scrollbar
+(tool-bar-mode -1)                 ; disable toolbar
+(tooltip-mode -1)                  ; disable tooltips
+(set-fringe-mode 10)               ; give some breathing room
+(menu-bar-mode -1)                 ; disable menubar
+(blink-cursor-mode 0)              ; disable blinking cursor
+#+end_src
+* Emacs Behaviours
+** Text Editing
+Remove trailing spaces in all files:
+#+begin_src emacs-lisp
+(add-hook 'before-save-hook #'whitespace-cleanup)
+#+end_src
+
+Remove double spaces behind full stops:
+#+begin_src emacs-lisp
+(setq-default sentence-end-double-space nil)
+#+end_src
+
+Enable global subword mode:
+#+begin_src emacs-lisp
+(global-subword-mode 1)
+#+end_src
+
+Set scroll conservatively to be high enough so that the cursor can stay at the top or bottom of the screen while text scrolls progressively:
+#+begin_src emacs-lisp
+(setq scroll-conservatively 1000)
+#+end_src
+
+Make the default mode for Emacs to be Emacs Lisp:
+#+begin_src emacs-lisp
+(setq-default initial-major-mode 'emacs-lisp-mode)
+#+end_src
+
+Indentation:
+#+begin_src emacs-lisp
+(setq-default indent-tabs-mode nil)
+(add-hook 'prog-mode-hook (lambda () (setq indent-tabs-mode nil)))
+#+end_src
+
+** Programming Modes
+Copied from phundrak's config, as is most things in this config:
+#+begin_quote
+First off, my definition of what makes a “programming mode” doesn’t exactly fit mine, so on top of ~prog-mode~, let’s add a few other modes.
+#+end_quote
+#+name: line-number-modes-table
+| Modes      |
+|------------|
+| prog-mode  |
+| latex-mode |
+
+#+name: prog-modes-gen
+#+header: :cache yes :exports none :tangle no
+#+begin_src emacs-lisp :var modes=line-number-modes-table
+(mapconcat (lambda (mode) (format "%s-hook" (car mode)))
+           modes
+           " ")
+#+end_src
+
+*** Line Number
+Display line numbers on the left side of the buffer.
+#+begin_src emacs-lisp
+(dolist (mode '(<<prog-modes-gen()>>))
+  (add-hook mode #'display-line-numbers-mode))
+#+end_src
+
+*** Folding code
+Enable folding of code blocks based on the level of indentation.
+#+begin_src emacs-lisp
+(dolist (mode '(<<prog-modes-gen()>>))
+  (add-hook mode #'hs-minor-mode))
+#+end_src
+** Cleanups
+Keep backup files separate from user defined configurations:
+#+begin_src emacs-lisp
+(setq backup-directory-alist `(("." . ,(expand-file-name ".tmp/backups/"
+                                                         user-emacs-directory)))
+      tramp-backup-directory-alist `(("." . ,(expand-file-name ".tmp/tramp-backups/"
+                                                               user-emacs-directory))))
+#+end_src
+Stop Emacs from creating symlinks for backups:
+#+begin_src emacs-lisp
+(setq backup-by-copying t)
+#+end_src
+Custom file for auto-generated litters:
+#+begin_src emacs-lisp
+(setq-default custom-file (expand-file-name ".custom.el" user-emacs-directory))
+(when (file-exists-p custom-file) ; Don’t forget to load it, we still need it
+  (load custom-file))
+#+end_src
+Trash instead of delete:
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t)
+#+end_src
+Disable messages at the beginning of scratch buffers:
+#+begin_src emacs-lisp
+(setq-default initial-scratch-message nil)
+#+end_src
+Enable global auto revert mode:
+#+begin_src emacs-lisp
+(global-auto-revert-mode 1)
+#+end_src
+** Misc
+Increase undo memory to 10MB and enable auto save:
+#+begin_src emacs-lisp
+(setq undo-limit        100000000
+      auto-save-default t)
+#+end_src
+Take new window space from all other windows:
+#+begin_src emacs-lisp
+(setq window-combination-resize t) ; take new window space from all other windows
+#+end_src
+* Personal Information
+Defining myself to Emacs
+#+begin_src emacs-lisp
+(setq user-full-name       "Yu Li"
+      user-real-login-name "james"
+      user-login-name      "james"
+      user-mail-address    "jamesyuli@outlook.com")
+#+end_src
+* Visual Configurations
+Enable visible bell to give a visual feedback when an action is not working as intended:
+#+begin_src emacs-lisp
+(setq visible-bell t)
+#+end_src
+
+Stretch cursor:
+#+begin_src emacs-lisp
+(setq x-stretch-cursor t)
+#+end_src
+
+Change the ellipsis marker:
+#+begin_src emacs-lisp
+(with-eval-after-load 'mule-util
+ (setq truncate-string-ellipsis "…"))
+#+end_src
+
+Alpha background:
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(alpha-background . 0.9))
+#+end_src
+** Modeline
+Display time in desired format:
+#+begin_src emacs-lisp
+(require 'time)
+(setq display-time-format "%Y-%m-%d %H:%M")
+(display-time-mode 1) ; display time in modeline
+#+end_src
+
+Battery indicator for when I'm on my laptop:
+#+begin_src emacs-lisp
+(let ((battery-str (battery)))
+  (unless (or (equal "Battery status not available" battery-str)
+              (string-match-p (regexp-quote "N/A") battery-str))
+    (display-battery-mode 1)))
+#+end_src
+
+Indicator to show the current column:
+#+begin_src emacs-lisp
+(column-number-mode)
+#+end_src
+** Fonts
+#+begin_src emacs-lisp
+(defvar james/default-font-size 90
+  "Default font size.")
+
+(defvar james/default-font-name "Sarasa Term SC Nerd"
+  "Default font.")
+
+(defun my/set-font ()
+  (when (find-font (font-spec :name james/default-font-name))
+    (set-face-attribute 'default nil
+                        :font james/default-font-name
+                        :height james/default-font-size)))
+
+(my/set-font)
+(add-hook 'server-after-make-frame-hook #'my/set-font)
+#+end_src
