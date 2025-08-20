@@ -128,7 +128,7 @@ alias update="sudo pacman --noconfirm -Syyuu && yay --noconfirm -Syyuua"
 alias r="source ~/.zshrc"
 alias shutdown="shutdown now"
 alias em="emacsclient -t -a \"\" -c"
-alias emacs="emacs -nw"
+# alias emacs="emacs -nw"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -165,6 +165,9 @@ export PATH=/home/james/.local/bin:$PATH
 
 # Doom Emacs
 export PATH=/home/james/.config/emacs/bin:$PATH
+
+# NPM
+export PATH=/home/james/.npm/bin:$PATH
 
 # Yazi
 function yy() {
