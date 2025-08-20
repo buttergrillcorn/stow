@@ -68,9 +68,9 @@
 
 (setq display-line-numbers-type 'relative)
 
-(map! "C-h" 'switch-to-prev-buffer)
-(map! "C-l" 'switch-to-next-buffer)
-(map! "C-S-l" 'recenter-top-bottom)
+;; (map! "C-h" 'switch-to-prev-buffer)
+;; (map! "C-l" 'switch-to-next-buffer)
+;; (map! "C-S-l" 'recenter-top-bottom)
 
 ;; (setq which-key-idle-delay 0.2)
 (setq auto-save-visited-interval 15)
@@ -104,8 +104,8 @@
   (setq org-hide-emphasis-markers t)
   (setq org-pretty-entities t))
 
-(setq +format-on-save-disabled-modes
-      '(org-mode))
+;; (setq +format-on-save-disabled-modes
+;;       '(org-mode))
 
 (setq org-pomodoro-length 30)
 
@@ -122,11 +122,17 @@
   (add-hook 'org-mode-hook 'org-auto-tangle-mode))
 
 (setq org-auto-tangle-babel-safelist '(
-                                     "~/example.org"
-                                     "~/example2.org"
-                                     ))
+                                       "~/example.org"
+                                       "~/example2.org"
+                                       ))
 
-(after! denote
+(use-package! denote
+  :hook
+  (dired-mode . denote-dired-mode)
+  :config
+  (denote-rename-buffer-mode 1)
+  (setq denote-buffer-name-prefix "<NOTE> ")
+  (setq denote-rename-buffer-format "[%k] %t")
   (setq denote-directory "~/denote")
   (setq denote-known-keywords nil)
   (setq denote-date-prompt-use-org-read-date t))
@@ -140,19 +146,20 @@
        :desc "open/create note" "d" #'denote-open-or-create
        :desc "find link" "l" #'denote-find-link
        :desc "backlinks" "b" #'denote-backlinks
-       :desc "backlink for heading" "B" #'denote-org-extras-link-to-heading
+       :desc "backlink for heading" "B" #'denote-org-link-to-heading
        :desc "template" "t" #'denote-template
+       :desc "capture region" "c" #'denote-region
        (:prefix ("i" . "insert")
         :desc "insert/create link" "l" #'denote-link-or-create
         :desc "insert/create link in bg" "L" #'denote-link-after-creating
         :desc "insert front matter" "f" #'denote-add-front-matter
-        :desc "insert heading link" "h" #'denote-org-extras-link-to-heading
+        :desc "insert heading link" "h" #'denote-org-link-to-heading
         :desc "insert link matching REGEXP" "r" #'denote-add-links
         (:prefix ("d" . "dynamic blocks")
-                  :desc "links" "l" #'denote-org-extras-dblock-insert-links
-                  :desc "backlinks" "b" #'denote-org-extras-dblock-insert-backlinks
-                  :desc "files" "f" #'denote-org-extras-dblock-insert-files
-                  :desc "missing links" "m" #'denote-org-extras-dblock-insert-missing-links))
+         :desc "links" "l" #'denote-org-dblock-insert-links
+         :desc "backlinks" "b" #'denote-org-dblock-insert-backlinks
+         :desc "files" "f" #'denote-org-dblock-insert-files
+         :desc "missing links" "m" #'denote-org-dblock-insert-missing-links))
        (:prefix ("r" . "rename")
         :desc "rename note" "r" #'denote-rename-file
         :desc "rename keyword" "k" #'denote-rename-file-keywords
@@ -166,16 +173,71 @@
        (:prefix ("i" . "insert")
         :desc "insert heading link" "h" #'denote-org-link-to-heading
         (:prefix ("d" . "dynamic blocks")
-                  :desc "links" "l" #'denote-org-dblock-insert-links
-                  :desc "backlinks" "b" #'denote-org-dblock-insert-backlinks
-                  :desc "files" "f" #'denote-org-dblock-insert-files
-                  :desc "missing links" "m" #'denote-org-dblock-insert-missing-links))))
+         :desc "links" "l" #'denote-org-dblock-insert-links
+         :desc "backlinks" "b" #'denote-org-dblock-insert-backlinks
+         :desc "files" "f" #'denote-org-dblock-insert-files
+         :desc "missing links" "m" #'denote-org-dblock-insert-missing-links))))
+
+(use-package! denote-explore
+  :after denote
+  :config
+  (require 'denote))
+
+(after! denote-explore
+  (map! :leader
+        (:prefix ("d" . "denote")
+                 (:prefix ("e" . "explore")
+                  :desc "network" "n" #'denote-explore-network
+                  :desc "network regenerate" "N" #'denote-explore-network-regenerate
+
+                  (:prefix ("c" . "count")
+                   :desc "notes" "n" #'denote-explore-count-notes
+                   :desc "keywords" "k" #'denote-explore-count-keywords)
+
+                  (:prefix ("b" . "bar chart")
+                   :desc "file types" "f" #'denote-explore-barchart-filetypes
+                   :desc "keywords" "k" #'denote-explore-barchart-keywords
+                   :desc "timeline" "t" #'denote-explore-barchart-timeline
+                   :desc "degree" "d" #'denote-explore-barchart-degree
+                   :desc "backlinks" "b" #'denote-explore-barchart-backlinks)
+
+                  (:prefix ("r" . "random walks")
+                   :desc "note" "n" #'denote-explore-random-note
+                   :desc "regex" "r" #'denote-explore-random-regex
+                   :desc "link" "l" #'denote-explore-random-link
+                   :desc "keyword" "k" #'denote-explore-random-keyword)
+
+                  (:prefix ("j" . "janitor")
+                   :desc "duplicate notes" "d" #'denote-explore-duplicate-notes
+                   :desc "duplicate notes(dired)" "D" #'denote-explore-duplicate-notes-dired
+                   :desc "missing links" "l" #'denote-explore-missing-links
+                   :desc "zero keywords" "z" #'denote-explore-zero-keywords
+                   :desc "single keywords" "k" #'denote-explore-single-keywords
+                   :desc "rename keywords" "r" #'denote-explore-rename-keywords
+                   :desc "sync metadata" "s" #'denote-explore-sync-metadata
+                   :desc "isolated files" "i" #'denote-explore-isolated-files)))))
+
+(after! denote
+  (unless (boundp 'denote-id-regexp)
+    ;; Try to find the actual variable name in your denote version
+    (setq denote-id-regexp
+          (or (and (boundp 'denote-identifier-regexp) denote-identifier-regexp)
+              "[0-9]\\{8\\}T[0-9]\\{6\\}"))))  ; fallback pattern
+
+(use-package! consult-denote
+  :config
+  (consult-denote-mode 1))
 
 (map! :leader
       (:prefix-map ("d" . "denote")
        :desc "Search notes" "s" #'consult-denote-find
        :desc "Search notes w/grep" "S"
        #'consult-denote-grep))
+
+(use-package! denote-journal
+  :after denote
+  :config
+  (setq denote-journal-title-format "%Y-%m-%e"))
 
 (map! :leader
       (:prefix-map ("d" . "denote")
@@ -190,6 +252,56 @@
                                                    (interactive)
                                                    (let ((current-prefix-arg '(4)))
                                                      (call-interactively #'denote-journal-link-or-create-entry))))))
+
+;; Simple denote completion formatting
+(defun my-format-denote-candidate (file)
+  "Format denote file for completion display with right-aligned keywords."
+  (when (string-match-p "[0-9]\\{8\\}T[0-9]\\{6\\}" file)
+    (let* ((full-path (expand-file-name file (denote-directory)))
+           (date-str (ignore-errors (denote-retrieve-filename-identifier full-path)))
+           (title (ignore-errors (denote-retrieve-filename-title full-path)))
+           (keywords (ignore-errors (denote-retrieve-filename-keywords full-path))))
+      (when date-str
+        (let* ((formatted-date (format "[ %s-%s-%s ]"
+                                      (substring date-str 0 4)
+                                      (substring date-str 4 6)
+                                      (substring date-str 6 8)))
+               (formatted-title (if title
+                                  (replace-regexp-in-string "-" " " title)
+                                ""))
+               (formatted-keywords (cond
+                                   ((listp keywords) 
+                                    (mapconcat (lambda (k) (replace-regexp-in-string "_" " " k)) keywords " "))
+                                   ((stringp keywords) 
+                                    (replace-regexp-in-string "_" " " keywords))
+                                   (t "")))
+               ;; Calculate padding to right-align keywords dynamically
+               (left-part (format "%s %s" formatted-date formatted-title))
+               (window-width (window-width (minibuffer-window)))
+               (padding-needed (max 1 (- window-width (length left-part) (length formatted-keywords) 2)))
+               (padding (make-string padding-needed ?\s)))
+          
+          (if (and formatted-keywords (not (string-empty-p formatted-keywords)))
+              (format "%s%s%s" left-part padding formatted-keywords)
+            left-part))))))
+
+;; Override the denote file prompt function
+(defun my-denote-file-prompt (&optional files-matching-regexp prompt-text no-require-match &rest _ignore)
+  "Custom denote file prompt with formatted display."
+  (let* ((files (denote-directory-files files-matching-regexp))
+         (file-alist (mapcar (lambda (file)
+                              (let* ((relative-file (denote-get-file-name-relative-to-denote-directory file))
+                                     (formatted (my-format-denote-candidate relative-file)))
+                                (cons (or formatted relative-file) file)))
+                            files))
+         (choice (completing-read 
+                 (or prompt-text "Select file: ")
+                 file-alist nil
+                 (unless no-require-match :require-match))))
+    (cdr (assoc choice file-alist))))
+
+;; Apply the override
+(advice-add 'denote-file-prompt :override #'my-denote-file-prompt)
 
 ;; (projectile-add-known-project "~/org")
 (projectile-add-known-project "~/denote")

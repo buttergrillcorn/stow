@@ -20,6 +20,7 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+;;; init.el -*- lexical-binding: t; -*-
 (doom! :input
        ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
        chinese
@@ -27,7 +28,7 @@
        ;;layout            ; auie,ctsrnm is the superior home row
 
        :completion
-       company           ; the ultimate code completion backend
+       ;; company           ; the ultimate code completion backend
        ;; (helm              ; the *other* search engine for love and life
        ;;  +icons
        ;;  +fuzzy)
@@ -43,11 +44,11 @@
        ;;deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
-       ;; doom-quit         ; DOOM quit-message prompts when you quit Emacs
+       doom-quit         ; DOOM quit-message prompts when you quit Emacs
        (emoji +unicode)  ; 🙂
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
-       ;;hydra
-       ;; indent-guides     ; highlighted indent columns
+       hydra
+       indent-guides     ; highlighted indent columns
        ligatures         ; ligatures and symbols to make your code pretty again
        ;;minimap           ; show a map of the code on the side
        modeline          ; snazzy, Atom-inspired modeline, plus API
@@ -58,34 +59,37 @@
        ;; tabs              ; a tab bar for Emacs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        unicode           ; extended unicode support for various languages
-       (vc-gutter +pretty) ; vcs diff in the fringe
-       vi-tilde-fringe   ; fringe tildes to mark beyond EOB
+       ;; (vc-gutter +pretty) ; vcs diff in the fringe
+       ;; vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        window-select     ; visually switch windows
-       workspaces        ; tab emulation, persistence & separate workspaces
+       ;; workspaces        ; tab emulation, persistence & separate workspaces
        zen               ; distraction-free coding or writing
 
        :editor
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       format  ; automated prettiness
-       ;;god               ; run Emacs commands without modifier keys
-       ;;lispy             ; vim for lisp, for people who don't like vim
+       (format  ; automated prettiness
+        +onsave
+        +lsp)
+       ;; god               ; run Emacs commands without modifier keys
+       ;; lispy             ; vim for lisp, for people who don't like vim
        ;; multiple-cursors  ; editing in many places at once
-       ;;objed             ; text object editing for the innocent
-       ;;parinfer          ; turn lisp into python, sort of
-       ;;rotate-text       ; cycle region at point between text candidates
+       ;; objed             ; text object editing for the innocent
+       ;; parinfer          ; turn lisp into python, sort of
+       ;; rotate-text       ; cycle region at point between text candidates
        snippets          ; my elves. They type so I don't have to
        word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
        (dired             ; making dired pretty [functional]
         +icon
-        +ranger)
+        +dirvish)
        electric          ; smarter, keyword-based electric-indent
-       ;; ibuffer         ; interactive buffer management
-       (undo              ; persistent, smarter undo for your inevitable mistakes
-        +tree)
+       (ibuffer         ; interactive buffer management
+        +icons)
+       tramp
+       undo              ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
        :term
@@ -112,6 +116,7 @@
        ;; gist              ; interacting with github gists
        lookup              ; navigate your code and its documentation
        (lsp               ; M-x vscode
+        +eglot
         +peek)
        magit             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
@@ -210,7 +215,7 @@
        ;;zig               ; C, but simpler
 
        :email
-       ;; (mu4e +org +gmail)
+       (mu4e +org +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 
